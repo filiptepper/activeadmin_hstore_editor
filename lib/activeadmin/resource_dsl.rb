@@ -3,7 +3,16 @@ require 'activeadmin'
 
 module ActiveAdmin
   class ResourceDSL
+
     def hstore_editor
+      hstore_and_json_editor
+    end
+
+    def json_editor
+      hstore_and_json_editor
+    end
+
+    def hstore_and_json_editor
       before_save do |object,args|
         request_namespace = object.class.name.underscore.gsub('/', '_')
         if params.key? request_namespace
